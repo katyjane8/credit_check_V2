@@ -1,5 +1,3 @@
-require 'pry'
-
 #valid
 card_number = "4929735477250542"
 cc_1 = "4929735477250543"
@@ -20,15 +18,12 @@ valid = false
 
 def credit_check(card_number)
   results = 0
-  # from the rightmost digit, which is the check digit, moving left, double the value of every second digit
   card_number.split("").reverse.each_with_index do |numbers, second_number|
     if second_number.even?
       results += numbers.to_i
     elsif numbers.to_i * 2 > 9
-  # if product of this doubling operation is greater than 9 (e.g., 7 * 2 = 14), then sum the digits of the products (e.g., 10: 1 + 0 = 1, 14: 1 + 4 = 5).
       double = numbers.to_i * 2
       results += double.digits.sum
-      # take the sum of all the digits
     else
       results += numbers.to_i * 2
     end
@@ -36,7 +31,6 @@ def credit_check(card_number)
 
   if results % 10 == 0
     puts "The number is valid"
-    # if and only if the total modulo 10 is equal to 0 then the number is valid
   else
     puts "The number is invalid"
   end
